@@ -1,0 +1,49 @@
+<html>
+
+    <head>
+        <title>Cw. 1</title>
+        <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+        <script type="text/javascript" src="../gl-matrix.js"></script>
+
+        <script id="shader-fs" type="x-shader/x-fragment">
+            precision mediump float;
+
+            varying vec2 vTextureCoord;
+
+            uniform sampler2D uSampler;
+
+            void main(void) {
+              gl_FragColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
+            }
+        </script>
+
+        <script id="shader-vs" type="x-shader/x-vertex">
+            attribute vec3 aVertexPosition;
+            attribute vec2 aTextureCoord;
+
+            uniform mat4 uMVMatrix;
+            uniform mat4 uPMatrix;
+
+            varying vec2 vTextureCoord;
+
+            void main(void) {
+                gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+                vTextureCoord = aTextureCoord;
+            }
+        </script>
+
+        <script type="text/javascript" src="cw7.js"></script>
+
+    </head>
+
+
+    <body onload="webGLStart();" style="text-align: center;">
+        <h2>Tekst</h2>
+        <canvas id="text-canvas" width="256" height="256">
+            Your browser does not support the HTML5 canvas tag.
+        </canvas><br/>
+        <canvas id="7-canvas" style="border: 1px #e9e9e9 solid;" width="640" height="580"></canvas>
+    </body>
+
+</html>
